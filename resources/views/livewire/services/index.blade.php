@@ -5,7 +5,7 @@
     </h1>
     @livewire('services.services-nav')
     @foreach ($this->thisMonthServices as $weeks => $services)
-        <div class="my-12">
+        <div class="mb-6 mt-2">
             <h2 class="mb-4 text-xl tracking-tight leading-none text-gray-900 md:text-2xl lg:text-2xl xl:text-2xl dark:text-white"
                 wire:key="{{ $loop->index }}">
                 week {{ $loop->index + 1 }}
