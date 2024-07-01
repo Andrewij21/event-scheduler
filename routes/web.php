@@ -5,6 +5,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\livewire;
 use App\Livewire\Services\ServiceDetailPage;
 use App\Livewire\Services\ServicesPage;
+use App\Livewire\Users\UsersPage;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", function () {
@@ -12,6 +13,7 @@ Route::get("/", function () {
 });
 Route::get('/services', ServicesPage::class);
 Route::get('/services/{id}', ServiceDetailPage::class);
+Route::get('/users', UsersPage::class);
 
 
 
