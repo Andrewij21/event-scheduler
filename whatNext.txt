@@ -2,3 +2,4 @@
 2. applay page for service detail
 batasan pelayanan
 vabalibility
+ada bug di tambah servcie juka salah penulisan tanggal

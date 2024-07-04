@@ -20,6 +20,10 @@ class ServicesPage extends Component
     // }
 
     #[On('service-created')]
+    public function serviceCreated()
+    {
+        unset($this->thisMonthServices);
+    }
     #[Computed()]
     public function thisMonthServices()
     {
