@@ -21,7 +21,12 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    public $with = ['division'];
 
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
