@@ -21,6 +21,10 @@ class UsersPage extends Component
     {
         return User::where("name", "like", "%" . $this->search . "%")->get();
     }
+    public function destroyUser(User $user)
+    {
+        User::destroy($user->id);
+    }
     public function render()
     {
         return view('livewire.users.users-page')->layout('components.layout');
