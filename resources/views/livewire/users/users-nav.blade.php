@@ -26,15 +26,47 @@
 
                     <x-modal id="modal1" title="Add User">
                         <x-slot:body>
-                            <form class="p-4 md:p-5" wire:submit="createNewService">
+                            <form class="p-4 md:p-5" wire:submit="createUser">
                                 <div class="grid gap-4 mb-4 grid-cols-2 ">
                                     <div class="col-span-2">
                                         <label for="name"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             Name</label>
                                         <input type="text" id="name" wire:model="name"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        @error('name')
+                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
+                                                    class="font-medium">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="col-span-2">
+                                        <label for="division"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select
+                                            division</label>
+                                        <select id="countries" wire:model="division_id"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            @foreach ($this->divisions as $division)
+                                                @if ($loop->first)
+                                                    <option wire:key="{{ $division->id }}" value="{{ $division->id }}">
+                                                        {{ $division->name }}</option>
+                                                @else
+                                                    <option wire:key="{{ $division->id }}" value="{{ $division->id }}">
+                                                        {{ $division->name }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <label for="email"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Email</label>
+                                        <input type="text" id="name" wire:model="email"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Type event name" required="">
+                                            required>
+                                        @error('email')
+                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
+                                                    class="font-medium">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="col-span-2">
                                         <label for="date"
@@ -43,9 +75,12 @@
                                             <div
                                                 class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                             </div>
-                                            <input type="password" id="date" wire:model="date"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="***********">
+                                            <input type="password" id="date" wire:model="password"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            @error('password')
+                                                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
+                                                        class="font-medium">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -59,7 +94,7 @@
                                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    Add new service
+                                    Add new user
                                 </button>
                             </form>
                         </x-slot:body>

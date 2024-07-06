@@ -16,6 +16,15 @@ class UsersPage extends Component
         $this->search = $search;
         unset($this->users);
     }
+
+    // #[On('user-created')]
+    // public function userCreated($search)
+    // {
+    //     $this->search = "";
+    //     unset($this->users);
+    // }
+
+
     #[Computed()]
     public function users()
     {
