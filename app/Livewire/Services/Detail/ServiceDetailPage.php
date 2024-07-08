@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Services;
+namespace App\Livewire\Services\Detail;
 
 use App\Models\Division;
 use App\Models\Schedule;
@@ -46,7 +46,7 @@ class ServiceDetailPage extends Component
                     });
                 })->get();
 
-            return view('livewire.services.detail', ['schedules' => $query])->layout('components.layout');
+            return view('livewire.services.detail.service-detail-page', ['schedules' => $query])->layout('components.layout');
         }
 
         abort(404, 'Service not found.');

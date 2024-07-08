@@ -57,6 +57,6 @@ class ServicesPage extends Component
     }
     public function render()
     {
-        return view('livewire.services.index')->layout('components.layout');
+        return view('livewire.services.services-page')->layout('components.layout');
     }
 }

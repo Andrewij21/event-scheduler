@@ -3,7 +3,7 @@
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\livewire;
-use App\Livewire\Services\ServiceDetailPage;
+use App\Livewire\Services\Detail\ServiceDetailPage;
 use App\Livewire\Services\ServicesPage;
 use App\Livewire\Users\UsersPage;
 use Illuminate\Support\Facades\Route;
