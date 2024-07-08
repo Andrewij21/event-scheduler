@@ -5,7 +5,7 @@
     </h1>
 
     {{-- NAV --}}
-    <div
+    {{-- <div
         class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 mt-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <div>
             <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction"
@@ -54,7 +54,8 @@
                 class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search for users">
         </div>
-    </div>
+    </div> --}}
+    @livewire('services.detail.service-detail-nav')
 
     {{-- TABLE --}}
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -78,7 +79,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($schedules as $schedule)
+            @foreach ($this->schedules as $schedule)
                 <tr wire:key="{{ $schedule->id }}"
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td class="w-4 p-4">
@@ -106,7 +107,6 @@
                     <td class="px-6 py-4">
                         <button wire:click="destroyUserSchedule({{ $schedule->id }})"
                             class="font-medium text-rose-600 dark:text-rose-500 hover:underline">
-                            {{-- <i class="bi bi-trash"></i> --}}
                             Remove
                         </button>
                     </td>

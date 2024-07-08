@@ -6,25 +6,21 @@ use App\Models\Division;
 use App\Models\Schedule;
 use App\Models\Service;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ServiceDetailPage extends Component
 {
-    public ?string $id = null; // Define the id property
-    public $selectedDivisionId; // Define the id property
-    public $selectedDivision = "All"; // Define the id property
+    public ?string $id = null; // Define the id property 
     public $search = '';
-    public function filterDivision($id, $name = "All")
-    {
-        $this->selectedDivisionId = $id;
-        $this->selectedDivision = $name;
-    }
     protected $queryString = ['id'];
 
-    #[Computed()]
-    public function divisions()
+    #[On('search')]
+    public function updatedSearch($search)
     {
-        return Division::latest()->get();
+        // dump($search);
+        $this->search = $search;
+        unset($this->schedules);
     }
 
     public function destroyUserSchedule(Schedule $schedule)
@@ -32,21 +28,21 @@ class ServiceDetailPage extends Component
         Schedule::destroy($schedule->id);
     }
 
+    #[Computed()]
+    public function schedules()
+    {
+        return Schedule::where("service_id", $this->id)->when($this->search ?? false, function ($query, $search) {
+            return $query->whereHas('user', function ($query) use ($search) {
+                $query->where('name', "like", "%" . $this->search . "%");
+            });
+        })->get();
+    }
+
     public function render()
     {
         $service = Service::find($this->id);
         if (isset($service)) {
-            $query = Schedule::where('service_id', $service->id)
-                ->when($this->selectedDivisionId, function ($query) {
-                    return $query->where('division_id', $this->selectedDivisionId);
-                })
-                ->when($this->search, function ($query) {
-                    return $query->whereHas('user', function ($q) {
-                        $q->where('name', 'like', '%' . $this->search . '%');
-                    });
-                })->get();
-
-            return view('livewire.services.detail.service-detail-page', ['schedules' => $query])->layout('components.layout');
+            return view('livewire.services.detail.service-detail-page')->layout('components.layout');
         }
 
         abort(404, 'Service not found.');
