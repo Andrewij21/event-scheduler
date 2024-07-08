@@ -9,15 +9,10 @@ use Livewire\Component;
 class ServiceDetailNav extends Component
 {
     public $search = '';
-
-    public $name;
-    public $email;
-    public $division_id;
-    public $password;
+    public $searchUser = '';
 
     public function addUser()
     {
-
         $this->dispatch('close-modal');
     }
     public function updatedSearch()
