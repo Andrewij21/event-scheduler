@@ -24,7 +24,9 @@ class ServiceDetailNav extends Component
     #[Computed()]
     public function users()
     {
-        return Schedule::whereNotIn("service_id", [$this->id])->get();
+        return Schedule::whereNotIn("service_id", [$this->id])->whereHas("user", function ($q) {
+            return $q->where('name', "like", "%" . $this->searchUser . "%");
+        })->get();
     }
     #[Computed()]
     public function divisions()
@@ -34,7 +36,6 @@ class ServiceDetailNav extends Component
     }
     public function render()
     {
-        dump($this->users());
         return view('livewire.services.detail.service-detail-nav');
     }
 }
