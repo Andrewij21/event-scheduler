@@ -12,14 +12,10 @@ class ServiceDetailNav extends Component
     public $search = '';
     public $searchUser = '';
     public $id; // Define the id property  
-    public function addUser()
+    public function addUser($id)
     {
+        dump($id);
         $this->dispatch('close-modal');
-    }
-    public function updatedSearch()
-    {
-        $this->dispatch('search', search: $this->search);
-        // $this->username = strtolower($this->username);
     }
     #[Computed()]
     public function users()
