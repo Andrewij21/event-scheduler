@@ -4,6 +4,8 @@ namespace App\Livewire\Services\Detail;
 
 use App\Models\Division;
 use App\Models\Schedule;
+use App\Models\Service;
+use App\Models\User;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -14,16 +16,26 @@ class ServiceDetailNav extends Component
     public $id; // Define the id property  
     public function addUser($id)
     {
-        dump($id);
+        $user = $this->users()->find($id);
+        // dump("$id");
+        Schedule::create([
+            "user_id" => $user->id,
+            "division_id" => $user->division_id,
+            "service_id" => $this->id
+        ]);
+        $this->dispatch('search', search: "");
         $this->dispatch('close-modal');
     }
     #[Computed()]
     public function users()
     {
-        return Schedule::whereNotIn("service_id", [$this->id])->whereHas("user", function ($q) {
-            return $q->where('name', "like", "%" . $this->searchUser . "%");
+        $scheduleId = $this->id;
+
+        return User::latest()->whereDoesntHave('schedule', function ($query) use ($scheduleId) {
+            $query->where('service_id', $scheduleId);
         })->get();
     }
+
     #[Computed()]
     public function divisions()
     {
@@ -32,6 +44,7 @@ class ServiceDetailNav extends Component
     }
     public function render()
     {
+        // dump($this->users);
         return view('livewire.services.detail.service-detail-nav');
     }
 }

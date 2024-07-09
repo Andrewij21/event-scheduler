@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Schedule extends Model
 {
     use HasFactory;
+    public $guarded = ["id"];
     public $with = ["user", 'division'];
     public function user()
     {

@@ -28,6 +28,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Division::class);
     }
+    public function schedule()
+    {
+        return $this->hasMany(Schedule::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
