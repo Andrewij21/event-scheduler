@@ -55,7 +55,7 @@
                 placeholder="Search for users">
         </div>
     </div> --}}
-    @livewire('services.detail.service-detail-nav')
+    @livewire('services.detail.service-detail-nav', ['id' => $id])
 
     {{-- TABLE --}}
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
