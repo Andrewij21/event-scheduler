@@ -1,5 +1,4 @@
 1. applay role gates
 2. applay page for service detail
-batasan pelayanan
-vabalibility
+batasan pelayanan 
 ada bug di tambah servcie juka salah penulisan tanggal
