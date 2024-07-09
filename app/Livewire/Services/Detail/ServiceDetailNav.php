@@ -7,6 +7,7 @@ use App\Models\Schedule;
 use App\Models\Service;
 use App\Models\User;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ServiceDetailNav extends Component
@@ -26,6 +27,7 @@ class ServiceDetailNav extends Component
         $this->dispatch('search', search: "");
         $this->dispatch('close-modal');
     }
+    #[On('refresh-user')]
     #[Computed()]
     public function users()
     {

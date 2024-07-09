@@ -26,6 +26,7 @@ class ServiceDetailPage extends Component
     public function destroyUserSchedule(Schedule $schedule)
     {
         Schedule::destroy($schedule->id);
+        $this->dispatch('refresh-user');
     }
 
     #[Computed()]
