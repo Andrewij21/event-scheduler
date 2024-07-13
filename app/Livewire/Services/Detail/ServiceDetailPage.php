@@ -13,6 +13,7 @@ class ServiceDetailPage extends Component
 {
     public ?string $id = null; // Define the id property 
     public $search = '';
+    public $searchDivision = '';
     protected $queryString = ['id'];
 
     #[On('search')]
@@ -22,7 +23,13 @@ class ServiceDetailPage extends Component
         $this->search = $search;
         unset($this->schedules);
     }
-
+    #[On('searchDivision')]
+    public function updatedSearchDivision($searchDivision)
+    {
+        // dump($searchDivision, "");
+        $this->searchDivision = $searchDivision;
+        unset($this->schedules);
+    }
     public function destroyUserSchedule(Schedule $schedule)
     {
         Schedule::destroy($schedule->id);
@@ -40,7 +47,9 @@ class ServiceDetailPage extends Component
     #[Computed()]
     public function divisions()
     {
-        return Division::latest()->get();
+        return Division::when($this->searchDivision, function ($query) {
+            $query->where("id", $this->searchDivision);
+        })->get();
     }
 
     public function render()

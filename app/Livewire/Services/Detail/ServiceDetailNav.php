@@ -55,9 +55,8 @@ class ServiceDetailNav extends Component
     }
     public function updatedSearchDivision()
     {
-        dump("helo");
-        // $this->dispatch('searchDivision', search: $this->search);
-        // $this->username = strtolower($this->username);
+        // dump("helo");
+        $this->dispatch('searchDivision', searchDivision: $this->searchDivision);
     }
     public function render()
     {
