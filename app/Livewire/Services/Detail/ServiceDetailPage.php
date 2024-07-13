@@ -37,6 +37,12 @@ class ServiceDetailPage extends Component
         })->get();
     }
 
+    #[Computed()]
+    public function divisions()
+    {
+        return Division::latest()->get();
+    }
+
     public function render()
     {
         $service = Service::find($this->id);

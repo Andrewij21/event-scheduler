@@ -58,60 +58,68 @@
     @livewire('services.detail.service-detail-nav', ['id' => $id])
 
     {{-- TABLE --}}
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="p-4">
-                    No
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Name
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Division
-                </th>
-                {{-- <th scope="col" class="px-6 py-3">
+
+    @foreach ($this->divisions as $division)
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mb-6">
+            <h2 class="mb-1 capitalize font-semibold">
+                {{ $division->name }}
+            </h2>
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="p-4">
+                        No
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Division
+                    </th>
+                    {{-- <th scope="col" class="px-6 py-3">
                     Avability
                 </th> --}}
-                <th scope="col" class="px-6 py-3">
-                    Action
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($this->schedules as $schedule)
-                <tr wire:key="{{ $schedule->id }}"
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="w-4 p-4">
-                        <div class="flex items-center">
-                            {{ $loop->index + 1 }}
-                        </div>
-                    </td>
-                    <th scope="row"
-                        class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                        <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg"
-                            alt="Jese image">
-                        <div class="ps-3">
-                            <div class="text-base font-semibold">{{ $schedule->user->name }}</div>
-                            <div class="font-normal text-gray-500">{{ $schedule->user->email }}</div>
-                        </div>
+                    <th scope="col" class="px-6 py-3">
+                        Action
                     </th>
-                    <td class="px-6 py-4">
-                        {{ $schedule->division->name }}
-                    </td>
-                    {{-- <td class="px-6 py-4">
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($this->schedules as $schedule)
+                    @if ($schedule->user->division->id == $division->id)
+                        <tr wire:key="{{ $schedule->id }}"
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    {{ $loop->index + 1 }}
+                                </div>
+                            </td>
+                            <th scope="row"
+                                class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg"
+                                    alt="Jese image">
+                                <div class="ps-3">
+                                    <div class="text-base font-semibold">{{ $schedule->user->name }}</div>
+                                    <div class="font-normal text-gray-500">{{ $schedule->user->email }}</div>
+                                </div>
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $schedule->user->division->name }}
+                            </td>
+                            {{-- <td class="px-6 py-4">
                         <div class="flex items-center">
                             <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Online
                         </div>
                     </td> --}}
-                    <td class="px-6 py-4">
-                        <button wire:click="destroyUserSchedule({{ $schedule->id }})"
-                            class="font-medium text-rose-600 dark:text-rose-500 hover:underline">
-                            Remove
-                        </button>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+                            <td class="px-6 py-4">
+                                <button wire:click="destroyUserSchedule({{ $schedule->id }})"
+                                    class="font-medium text-rose-600 dark:text-rose-500 hover:underline">
+                                    Remove
+                                </button>
+                            </td>
+                        </tr>
+                    @endif
+                @endforeach
+            </tbody>
+        </table>
+    @endforeach
 </div>
