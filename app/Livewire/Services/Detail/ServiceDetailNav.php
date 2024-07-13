@@ -14,7 +14,15 @@ class ServiceDetailNav extends Component
 {
     public $search = '';
     public $searchUser = '';
+    public $searchDivision = '';
     public $id; // Define the id property  
+
+    public function updatedSearch()
+    {
+        $this->dispatch('search', search: $this->search);
+        // $this->username = strtolower($this->username);
+    }
+
     public function addUser($id)
     {
         $user = $this->users()->find($id);
@@ -27,11 +35,7 @@ class ServiceDetailNav extends Component
         $this->dispatch('search', search: "");
         $this->dispatch('close-modal');
     }
-    public function updatedSearch()
-    {
-        $this->dispatch('search', search: $this->search);
-        // $this->username = strtolower($this->username);
-    }
+
     #[On('refresh-user')]
     #[Computed()]
     public function users()
@@ -49,9 +53,14 @@ class ServiceDetailNav extends Component
         $divisions = Division::latest()->get();
         return $divisions;
     }
+    public function updatedSearchDivision()
+    {
+        dump("helo");
+        // $this->dispatch('searchDivision', search: $this->search);
+        // $this->username = strtolower($this->username);
+    }
     public function render()
     {
-        // dump($this->users);
         return view('livewire.services.detail.service-detail-nav');
     }
 }
