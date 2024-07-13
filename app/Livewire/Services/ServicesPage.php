@@ -25,30 +25,16 @@ class ServicesPage extends Component
         unset($this->thisMonthServices);
     }
     #[Computed()]
-    public function thisMonthServices()
+    public function currentServices()
     {
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
 
         // Ambil semua event untuk bulan ini
-        $services = Service::whereYear('date', $currentYear)
+        return Service::whereYear('date', $currentYear)
             ->whereMonth('date', $currentMonth)->orderBy('date', 'asc')
             ->get();
-        // dd($services);
 
-        $thisMonthServices = [];
-
-        foreach ($services as $service) {
-            $date = Carbon::parse($service->date);
-            $weekStart = $date->copy()->startOfWeek(Carbon::MONDAY);
-            $weekEnd = $date->copy()->endOfWeek(Carbon::SUNDAY);
-            $weekKey = $weekStart->format('d') . '-' . $weekEnd->format('d F Y');
-
-            $thisMonthServices[$weekKey][] = $service;
-        }
-        ;
-        // dump($thisMonthServices);
-        return $thisMonthServices;
     }
 
     public function destroyService(Service $service)
