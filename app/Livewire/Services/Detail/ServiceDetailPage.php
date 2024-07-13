@@ -32,10 +32,8 @@ class ServiceDetailPage extends Component
     #[Computed()]
     public function schedules()
     {
-        return Schedule::where("service_id", $this->id)->when($this->search ?? false, function ($query, $search) {
-            return $query->whereHas('user', function ($query) use ($search) {
-                $query->where('name', "like", "%" . $this->search . "%");
-            });
+        return Schedule::where("service_id", $this->id)->whereHas('user', function ($query) {
+            $query->where('name', "like", "%" . $this->search . "%");
         })->get();
     }
 

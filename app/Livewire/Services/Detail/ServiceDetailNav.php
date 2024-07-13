@@ -27,6 +27,11 @@ class ServiceDetailNav extends Component
         $this->dispatch('search', search: "");
         $this->dispatch('close-modal');
     }
+    public function updatedSearch()
+    {
+        $this->dispatch('search', search: $this->search);
+        // $this->username = strtolower($this->username);
+    }
     #[On('refresh-user')]
     #[Computed()]
     public function users()
