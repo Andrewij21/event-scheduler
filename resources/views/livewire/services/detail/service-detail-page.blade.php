@@ -84,13 +84,14 @@
                 </tr>
             </thead>
             <tbody>
+                @php $localIndex = 1; @endphp
                 @foreach ($this->schedules as $schedule)
                     @if ($schedule->user->division->id == $division->id)
                         <tr wire:key="{{ $schedule->id }}"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="w-4 p-4">
                                 <div class="flex items-center">
-                                    {{ $loop->index + 1 }}
+                                    {{ $localIndex++ }}
                                 </div>
                             </td>
                             <th scope="row"
